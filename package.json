@@ -1,0 +1,25 @@
+{
+  "name": "hapi-good-logstash-tcp",
+  "version": "0.0.1",
+  "description": "A good reporter to talk to a logstash server via tcp",
+  "main": "src/lib.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "good",
+    "hapi",
+    "logstash"
+  ],
+  "author": "Stanislav Panferov <fnight.m@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s-panferov/hapi-good-logstash-tcp"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "good-squeeze": "^2.1.0",
+    "json-stringify-safe": "^5.0.1"
+  }
+}
