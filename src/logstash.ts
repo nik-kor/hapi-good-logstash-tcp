@@ -217,6 +217,7 @@ export class Logstash implements LogstashOptions {
 
             if (self.maxConnectRetries < 0 || self.retries < self.maxConnectRetries) {
                 if (!self.connecting) {
+                    console.log('Logstash connection retry');
                     setTimeout(function() {
                         self.connect();
                     }, self.timeoutConnectRetries);

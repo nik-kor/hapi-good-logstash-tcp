@@ -4,9 +4,10 @@ var _ = require('lodash');
 var Squeeze = require('good-squeeze').Squeeze;
 var Stringify = require('json-stringify-safe');
 var logstash_1 = require('./logstash');
+// Declare internals
 var internals = {
     defaults: {
-        threshold: 20,
+        threshold: 20
     },
     host: os.hostname()
 };
@@ -23,6 +24,8 @@ var GoodLogstashTcp = (function () {
                 squeeze: Squeeze(events)
             };
             this._logstash = new logstash_1.Logstash({
+                maxConnectRetries: this._settings.maxConnectRetries,
+                timeoutConnectRetries: this._settings.timeoutConnectRetries,
                 host: this._settings.tlsOptions.host,
                 port: this._settings.tlsOptions.port
             });
@@ -101,5 +104,5 @@ var GoodLogstashTcp = (function () {
     };
     return GoodLogstashTcp;
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = GoodLogstashTcp;
+exports.__esModule = true;
+exports["default"] = GoodLogstashTcp;

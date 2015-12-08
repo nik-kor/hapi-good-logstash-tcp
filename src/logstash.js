@@ -26,14 +26,17 @@ var Logstash = (function () {
             : 100;
         this.retries = -1;
         this.logstash = options.logstash || true;
+        // SSL Settings
         this.sslEnable = options.sslEnable || false;
         this.sslKey = options.sslKey || '';
         this.sslCert = options.sslCert || '';
         this.ca = options.ca || '';
         this.sslPassphrase = options.sslPassphrase || '';
         this.rejectUnauthorized = options.rejectUnauthorized === true;
+        // Connection state
         this.connected = false;
         this.socket = null;
+        // Miscellaneous options
         this.stripColors = options.stripColors || false;
         this.label = options.label || this.nodeName;
         this.connect();
@@ -45,6 +48,7 @@ var Logstash = (function () {
         }
         if (self.stripColors) {
             msg = msg.stripColors;
+            // Let's get rid of colors on our meta properties too.
             if (typeof meta === 'object') {
                 for (var property in meta) {
                     meta[property] = meta[property].stripColors;
@@ -130,6 +134,7 @@ var Logstash = (function () {
             self.connected = false;
             if (self.maxConnectRetries < 0 || self.retries < self.maxConnectRetries) {
                 if (!self.connecting) {
+                    console.log('Logstash connection retry');
                     setTimeout(function () {
                         self.connect();
                     }, self.timeoutConnectRetries);
@@ -209,6 +214,7 @@ function log(options) {
         output.timestamp = timestamp;
     }
     if (options.logstash === true) {
+        // use logstash format
         var logstashOutput = _.cloneDeep(output);
         if (output.timestamp !== undefined) {
             logstashOutput['@timestamp'] = output.timestamp;

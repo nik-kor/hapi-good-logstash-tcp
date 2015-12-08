@@ -4,7 +4,7 @@
   "description": "A good reporter to talk to a logstash server via tcp",
   "main": "src/lib.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "build": "./node_modules/.bin/tsc src/lib.ts --module commonjs --preserveConstEnums"
   },
   "keywords": [
     "good",
@@ -21,5 +21,8 @@
     "lodash": "^3.10.1",
     "good-squeeze": "^2.1.0",
     "json-stringify-safe": "^5.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^1.7.3"
   }
 }

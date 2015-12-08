@@ -27,7 +27,9 @@ export interface LogRecord {
 export interface GoodLogstashTcpSettings {
     disabled?: boolean,
     meta?: any,
-    processor?: (payload: any) => LogRecord[]
+    processor?: (payload: any) => LogRecord[],
+    maxConnectRetries?: number,
+    timeoutConnectRetries?: number,
     tlsOptions?: {
         host: string,
         port?: number,
@@ -61,6 +63,8 @@ export default class GoodLogstashTcp {
             };
 
             this._logstash = new Logstash({
+                maxConnectRetries: this._settings.maxConnectRetries,
+                timeoutConnectRetries: this._settings.timeoutConnectRetries,
                 host: this._settings.tlsOptions.host,
                 port: this._settings.tlsOptions.port
             });
